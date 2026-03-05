@@ -49,6 +49,16 @@ Notes about database choice
 - This project uses `mongoengine` to store `Post` documents in MongoDB. `mongoengine` is maintained and works with modern Django versions.
 - Django's built-in auth and admin continue to use a local SQLite database (`db.sqlite3`) so the `create_admin` command and Django admin work as expected. The Django admin will not manage `Post` documents in MongoDB.
 
+Render deployment note
+----------------------
+- Make sure to set the `MONGO_URI` environment variable on Render (Dashboard → Your Service → Environment). Example MongoDB Atlas connection string:
+
+```
+mongodb+srv://<username>:<password>@cluster0.abcd.mongodb.net/foodhub?retryWrites=true&w=majority
+```
+
+- If `MONGO_URI` is not set the app will log an error and MongoEngine won't connect; you'll see "You have not defined a default connection" when views try to access documents.
+
 
 What changed
 ------------

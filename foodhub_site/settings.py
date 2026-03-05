@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,21 +54,13 @@ WSGI_APPLICATION = 'foodhub_site.wsgi.application'
 # Database: djongo using MONGO_URI
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017/foodhub')
 
-# Use SQLite for Django auth/admin; use MongoEngine for Post documents
+# Use SQLite for Django auth/admin; MongoEngine documents connect in app ready()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# Connect to MongoDB with mongoengine (used for blog Post documents)
-try:
-    from mongoengine import connect
-    connect(host=MONGO_URI)
-except Exception:
-    # If mongoengine isn't installed yet, fail silently here; runtime will surface errors
-    pass
 
 AUTH_PASSWORD_VALIDATORS = []
 

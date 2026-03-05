@@ -56,7 +56,13 @@ def post_list(request):
 
 def post_detail(request, post_id):
     post = get_post_or_404(post_id)
-    return render(request, 'post_detail.html', {'object': post})
+    return render(request, 'public_post_detail.html', {'object': post})
+
+
+@login_required(login_url='admin_login')
+def admin_post_detail(request, post_id):
+    post = get_post_or_404(post_id)
+    return render(request, 'admin_post_detail.html', {'object': post})
 
 
 @login_required(login_url='admin_login')

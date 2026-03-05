@@ -10,7 +10,8 @@
 
         <form method="post" class="space-y-6">
             {% csrf_token %}
-            
+            <input type="hidden" name="next" value="{{ next }}">
+
             {% if error %}
             <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
                 <p class="text-red-700 text-sm">{{ error }}</p>
@@ -38,7 +39,7 @@
                 </button>
             </div>
         </form>
-        
+
         <div class="mt-6 text-center">
             <a href="{% url 'landing_page' %}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                 &lsaquo; Back to home

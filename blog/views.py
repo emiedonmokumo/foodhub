@@ -24,17 +24,24 @@ def admin_login(request):
         return redirect('post_list')
     
     error = None
+    next_url = request.GET.get('next', 'post_list')
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        next_url = request.POST.get('next', 'post_list')
+        
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('post_list')
+            if user.is_staff or user.is_superuser:
+                login(request, user)
+                return redirect(next_url)
+            else:
+                error = "Access denied. Admin privileges required."
         else:
             error = "Invalid username or password"
             
-    return render(request, 'admin_login.html', {'error': error})
+    return render(request, 'admin_login.html', {'error': error, 'next': next_url})
 
 
 def admin_logout(request):

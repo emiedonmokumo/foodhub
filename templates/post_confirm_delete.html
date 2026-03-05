@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-bold">Delete Post</h2>
+    <p class="mt-2">Are you sure you want to delete "{{ object.title }}"?</p>
+    <form method="post" class="mt-4">
+      {% csrf_token %}
+      <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded">Delete</button>
+      <a href="{% url 'post_list' %}" class="ml-3 text-gray-600">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

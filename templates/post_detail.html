@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <article class="bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold">{{ object.title }}</h1>
+    <p class="text-sm text-gray-600">{{ object.published_date }}</p>
+    <div class="mt-4 text-gray-800">{{ object.content }}</div>
+    <div class="mt-4">
+      <a href="{% url 'post_edit' object.pk %}" class="text-indigo-600">Edit</a>
+      <a href="{% url 'post_delete' object.pk %}" class="text-red-600 ml-4">Delete</a>
+    </div>
+  </article>
+{% endblock %}

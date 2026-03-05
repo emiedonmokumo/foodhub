@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-bold mb-4">{% if object %}Edit{% else %}New{% endif %} Post</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="space-y-3">
+        {{ form.as_p }}
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded">Save</button>
+        <a href="{% url 'post_list' %}" class="ml-3 text-gray-600">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
